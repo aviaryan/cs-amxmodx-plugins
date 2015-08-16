@@ -29,34 +29,20 @@ public bombPlanting(){
 		return PLUGIN_HANDLED;
 	
 	new b[24];
-	read_data(2, b, 23);
+	read_data(2, b, 23); // planting
 	
 	new players[32];
 	new playercount, i;
 	get_players(players, playercount, "a");
 	
-	//new CsTeams:teamname;
 	
 	for (i=0; i<playercount; i++){
 		if ( cs_get_user_plant(players[i]) ){
-			//get_user_name(players[i], playername, 63);
-			//teamname = cs_get_user_team(players[i]);
 			client_cmd(players[i], "say_team Planting...");
 			client_cmd(players[i], "spk radio/bot/planting");
 			break;
 		}
 	}
 	
-	/*for (i=0; i<playercount; i++){
-		if (cs_get_user_team(players[i]) == teamname){
-			//client_print(players[i], print_chat, "%s is planting the bomb", playername);
-			client_cmd(players[i], "say_team I m going to plant the bomb");
-			client_cmd(players[i], "spk radio/bot/im_going_to_plant_the_bomb");
-		}
-	}*/
-	
 	return PLUGIN_HANDLED;
 }
-/* AMXX-Studio Notes - DO NOT MODIFY BELOW HERE
-*{\\ rtf1\\ ansi\\ deff0{\\ fonttbl{\\ f0\\ fnil Tahoma;}}\n\\ viewkind4\\ uc1\\ pard\\ lang16393\\ f0\\ fs16 \n\\ par }
-*/
