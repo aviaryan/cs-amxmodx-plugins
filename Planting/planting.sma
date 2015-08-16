@@ -8,13 +8,13 @@
 #define VERSION "0.1"
 #define AUTHOR "aviaryan"
 
-new apa_enabled;
+new planting_enabled;
 
 public plugin_init() {
 	register_plugin(PLUGIN, VERSION, AUTHOR);
 	register_event("BarTime", "bombPlanting", "be", "1=3");
 	
-	apa_enabled = register_cvar("apa", "1");
+	planting_enabled = register_cvar("planting", "1");
 	
 	console_print(0, "*** %s plugin by %s (http://aviaryan.in) ***", PLUGIN, AUTHOR);
 }
@@ -25,7 +25,7 @@ public plugin_precache(){
 
 public bombPlanting(){
 	
-	if (get_pcvar_num(apa_enabled) != 1)
+	if (get_pcvar_num(planting_enabled) != 1)
 		return PLUGIN_HANDLED;
 	
 	new b[24];
@@ -37,12 +37,17 @@ public bombPlanting(){
 	
 	
 	for (i=0; i<playercount; i++){
-		if ( cs_get_user_plant(players[i]) ){
-			client_cmd(players[i], "say_team Planting...");
-			client_cmd(players[i], "spk radio/bot/planting");
-			break;
+		if ( !is_user_bot(players[i]) ){
+			if ( cs_get_user_plant(players[i]) ){
+				client_cmd(players[i], "say_team Planting...");
+				client_cmd(players[i], "spk radio/bot/planting");
+				break;
+			}
 		}
 	}
 	
 	return PLUGIN_HANDLED;
 }
+/* AMXX-Studio Notes - DO NOT MODIFY BELOW HERE
+*{\\ rtf1\\ ansi\\ deff0{\\ fonttbl{\\ f0\\ fnil Tahoma;}}\n\\ viewkind4\\ uc1\\ pard\\ lang16393\\ f0\\ fs16 \n\\ par }
+*/
